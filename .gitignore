@@ -1,14 +1,16 @@
-# Ignorar la carpeta de descargas de música
+# Ignore the downloaded music folder
+Downloads/
 Descargas/
 
-# Ignorar la lista personal del usuario
+# Ignore the user's personal song list
+songs.txt
 canciones.txt
 
-# Ignorar audios descargados sueltos por error
+# Ignore randomly downloaded audio files
 *.mp3
 *.webm
 *.m4a
 
-# Archivos propios de Python
+# Python cache files
 __pycache__/
 *.pyc
