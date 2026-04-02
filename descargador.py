@@ -39,7 +39,7 @@ def descargar_canciones(archivo_texto):
         'postprocessors': [{
             'key': 'FFmpegExtractAudio',
             'preferredcodec': 'mp3',
-            'preferredquality': '192',
+            'preferredquality': '320', # Máxima calidad posible en MP3
         }],
         'outtmpl': f'{carpeta_salida}/%(title)s.%(ext)s', # Guardar en la carpeta Descargas
         'quiet': False,
