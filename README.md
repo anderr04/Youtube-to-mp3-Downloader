@@ -1,22 +1,24 @@
-# 🎵 Bot Musiquero (YouTube to MP3 Automático)
+# 🎵 Music Bot (Automatic YouTube to MP3 Downloader)
 
-Un script automatizado en Python diseñado para descargar canciones y playlists enteras desde YouTube u otras plataformas, convirtiéndolas directamente a formato MP3 de alta calidad. 
+An automated Python script designed to download songs, entire playlists, and podcasts from YouTube (and other platforms), converting them directly to high-quality MP3 files.
 
-Simplemente le proporcionas una lista de títulos o enlaces (URLs), y el bot se encarga del resto mágicamente.
+Simply provide a list of titles or URLs, and the bot will magically handle the rest!
 
-## ✨ Características Principales
-- 🧠 **Búsqueda Inteligente:** Si solo sabes el nombre de la canción, el bot busca en YouTube y filtra inteligentemente los resultados para obtener la versión de "Sólo Audio" o "Lyrics", evitando introducciones largas de videos musicales.
-- 🔗 **Soporte de URLs y Playlists:** Puedes pegar enlaces directos de videos, ¡e incluso enlaces de Playlists completas! El bot detectará si es una lista y descargará todos sus elementos a tu disco duro.
-- ⚙️ **Autoinstalable:** No necesitas pelear con instalaciones. Si alguien sin la librería `yt-dlp` ejecuta el script, este se encargará de instalar sus propias dependencias por sí solo.
-- 📁 **Organizado:** Crea una carpeta `/Descargas` donde organiza automáticamente todos los `.mp3` finalizados.
+## ✨ Key Features
+- 🧠 **Smart Search:** If you only know the song name, the bot searches YouTube and intelligently filters the results to grab the "Audio Only" or "Lyrics" version, avoiding the long intros of music videos.
+- 🔗 **URL & Playlist Support:** You can paste direct video links or even full Playlist URLs! The bot will detect the playlist and automatically download all of its content.
+- ⚙️ **Self-Installing:** No complicated setup process. If you don't have the `yt-dlp` library installed, the script will automatically install its own dependencies upon execution.
+- 📁 **Organized:** Automatically creates a `/Descargas` (`/Downloads`) folder and elegantly saves all your finished `.mp3` files there.
 
-## 🚀 Cómo usarlo
+## 🚀 How to Use It
 
-### 1. Prerrequisitos
-Lo único que necesitas para correr este programa es tener **[Python 3](https://www.python.org/downloads/)** instalado en tu computadora, y asegurarte de tener [FFmpeg](https://ffmpeg.org/download.html) disponible en tu sistema, el cual es el encargado de procesar y convertir el audio.
+### 1. Prerequisites
+The only things you need to run this program are:
+1. **[Python 3](https://www.python.org/downloads/)** installed on your computer.
+2. **[FFmpeg](https://ffmpeg.org/download.html)** available on your system (this is the engine responsible for extracting and converting the audio to MP3 at maximum quality).
 
-### 2. Configura tu lista
-Abre el archivo `canciones.txt` (o créalo si no existe) y escribe una canción/enlace por línea:
+### 2. Set up your list
+Open the `canciones.txt` file (or create it if it doesn't exist) and write one song title or link per line:
 ```text
 Queen - Bohemian Rhapsody
 https://www.youtube.com/watch?v=dQw4w9WgXcQ
@@ -24,15 +26,36 @@ Eminem - Without Me
 https://www.youtube.com/playlist?list=PLej... 
 ```
 
-### 3. ¡Ejecútalo!
-**Si estás en Windows:**
-Haz doble clic en `iniciar.bat`.
+### 3. Run it!
+**If you are on Windows:**
+Simply double-click on `iniciar.bat`.
 
-**Si estás usando consola o Linux/Mac:**
-Ejecuta el siguiente comando en tu terminal:
+**If you use the terminal (Linux/Mac/Windows):**
+Run the following command:
 ```bash
 python descargador.py
 ```
 
+## 🛠️ Advanced: Changing the Audio Quality or Format
+
+By default, the script downloads the audio in the highest available source quality and transcodes it to a high-quality `mp3` (192 kbps, which is standard HQ). If the audio source is lower, yt-dlp respects the original best quality.
+
+If you want to download the audio in a different format (like `wav`, `m4a`, `flac`) or change the bitrate to `320` kbps (Extreme Quality), you just need to modify a small part inside the `descargador.py` file!
+
+**How to do it:**
+Find the `opciones_base` dictionary (around line ~33) and change the `preferredcodec`:
+```python
+    'opciones_base' = {
+        'format': 'bestaudio/best',
+        'postprocessors': [{
+            'key': 'FFmpegExtractAudio',
+            'preferredcodec': 'wav', # <-- Change 'mp3' to 'wav', 'flac', 'm4a', etc.
+            'preferredquality': '320', # <-- Change '192' to '320' for max MP3 quality
+        }],
+        # ...
+    }
+```
+*(Note: If you remove that whole `postprocessors` block and change `format` to `bestvideo+bestaudio`, it will download it as an MP4 video instead!)*
+
 ---
-*Hecho para evitar tareas repetitivas y disfrutar la música al instante. No promueve la piratería.*
+*Created to avoid repetitive tasks and enjoy your music instantly. Does not promote piracy.*
