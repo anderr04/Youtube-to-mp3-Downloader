@@ -43,7 +43,7 @@ By default, the script downloads the audio in the highest available source quali
 If you want to download the audio in a different format (like `wav`, `m4a`, `flac`), you just need to modify a small part inside the `downloader.py` file!
 
 **How to do it:**
-Find the `base_options` dictionary (around line ~35) and change the `preferredcodec`:
+Find the `base_options` dictionary (around line ~13) and change the `preferredcodec`:
 ```python
     'base_options' = {
         'format': 'bestaudio/best',
@@ -55,7 +55,36 @@ Find the `base_options` dictionary (around line ~35) and change the `preferredco
         # ...
     }
 ```
+
 *(Note: If you remove that whole `postprocessors` block and change `format` to `bestvideo+bestaudio`, it will download it as an MP4 video instead!)*
+
+
+---
+
+## 🖼️ Thumbnail Support
+
+By default, the script downloads and embeds the thumbnail of each video into the final MP3 file.
+
+### Disable thumbnails
+
+If you don't want thumbnails, edit the `BASE_OPTIONS` in `downloader.py` and:
+
+1. Remove or set:
+
+```python
+'writethumbnail': False
+```
+
+2. Remove this postprocessor:
+
+```python
+{'key': 'EmbedThumbnail'}
+```
+
+After these changes, the script will download audio normally without thumbnails.
+
+
+
 
 ---
 *Created to avoid repetitive tasks and enjoy your music instantly. Does not promote piracy.*
